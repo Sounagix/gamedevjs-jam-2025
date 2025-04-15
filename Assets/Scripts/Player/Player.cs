@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     private bool _isHoldingBostKey = false;
 
+    private Vector2 _dir;
+
     private void OnEnable()
     {
         PlayerActions.OnPlayerMovementBoost += HandleBost;
@@ -61,6 +63,7 @@ public class Player : MonoBehaviour
         if (!_isHoldingBostKey && Math.Abs(_rigidbody2D.velocity.x) < _maxSpeed)
         {
             _rigidbody2D.AddForce(Vector2.left * _moveSpeed, ForceMode2D.Force);
+            _dir = Vector2.left;
         }
     }
 
@@ -74,6 +77,7 @@ public class Player : MonoBehaviour
         if (!_isHoldingBostKey && Math.Abs(_rigidbody2D.velocity.x) < _maxSpeed)
         {
             _rigidbody2D.AddForce(Vector2.right * _moveSpeed, ForceMode2D.Force);
+            _dir = Vector2.right;
         }
     }
 
@@ -94,5 +98,10 @@ public class Player : MonoBehaviour
             _isGrounded = true;
             PlayerActions.OnPlayerGrouded?.Invoke();
         }
+    }
+
+    public Vector2 GetDir()
+    {
+        return _dir;
     }
 }

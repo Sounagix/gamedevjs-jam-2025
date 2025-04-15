@@ -14,9 +14,13 @@ public static class PlayerActions
 
     public static Action PlayerJumping;
 
+    public static Action OnPlayerShoot;
+
     public static string GroundTag = "Ground";
 
     public static string PlayerTag = "Player";
+
+    public static string EnemyTag = "Enemy";
 
     public static Action<float> OnPlayerEnergyChanged;
 }
