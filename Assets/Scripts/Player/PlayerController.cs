@@ -13,11 +13,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private KeyCode _moveRightKey;
 
+    [SerializeField]
+    private KeyCode _bostKey;
+
     private void Update()
     {
         if (Input.GetKeyDown(_jumpKey))
         {
-            PlayerActions.OnPlayerJump?.Invoke();
+              PlayerActions.OnPlayerJump?.Invoke();
         }
         if (Input.GetKey(_moveLeftKey))
         {
@@ -26,6 +29,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(_moveRightKey))
         {
             PlayerActions.OnPlayerMoveRight?.Invoke();
+        }
+
+        if (Input.GetKeyDown(_bostKey))
+        {
+            PlayerActions.OnPlayerMovementBoost?.Invoke();
+        }
+        else if (Input.GetKeyUp(_bostKey))
+        {
+            PlayerActions.OnPlayerMovementBoost?.Invoke();
         }
     }
 }

@@ -20,18 +20,26 @@ public class Player : MonoBehaviour
 
     private bool _isGrounded = true;
 
+    private bool _isHoldingBostKey = false;
+
     private void OnEnable()
     {
+        PlayerActions.OnPlayerMovementBoost += HandleBost;
+        PlayerActions.PlayerJumping += PlayerJumping;
         PlayerActions.OnPlayerJump += HandleJump;
         PlayerActions.OnPlayerMoveLeft += HandleLeftMove;
         PlayerActions.OnPlayerMoveRight += HandleRightMove;
     }
 
+
     private void OnDisable()
     {
+        PlayerActions.OnPlayerMovementBoost -= HandleBost;
         PlayerActions.OnPlayerJump -= HandleJump;
         PlayerActions.OnPlayerMoveLeft -= HandleLeftMove;
         PlayerActions.OnPlayerMoveRight -= HandleRightMove;
+        PlayerActions.PlayerJumping -= PlayerJumping;
+
     }
 
     private void Awake()
@@ -44,22 +52,39 @@ public class Player : MonoBehaviour
         gameObject.tag = PlayerActions.PlayerTag;
     }
 
+    private void HandleBost()
+    {
+        _isHoldingBostKey = !_isHoldingBostKey;
+    }
     private void HandleLeftMove()
     {
-        if (Math.Abs(_rigidbody2D.velocity.x) > _maxSpeed) return;
-        _rigidbody2D.AddForce(Vector2.left * _moveSpeed, ForceMode2D.Force);
+        if (!_isHoldingBostKey && Math.Abs(_rigidbody2D.velocity.x) < _maxSpeed)
+        {
+            _rigidbody2D.AddForce(Vector2.left * _moveSpeed, ForceMode2D.Force);
+        }
+    }
+
+    private void PlayerJumping()
+    {
+        _isGrounded = false;
     }
 
     private void HandleRightMove()
     {
-        _rigidbody2D.AddForce(Vector2.right * _moveSpeed, ForceMode2D.Force);
+        if (!_isHoldingBostKey && Math.Abs(_rigidbody2D.velocity.x) < _maxSpeed)
+        {
+            _rigidbody2D.AddForce(Vector2.right * _moveSpeed, ForceMode2D.Force);
+        }
     }
 
     private void HandleJump()
     {
-        if (!_isGrounded) return;
-        _isGrounded = false;
-        _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+        if (!_isHoldingBostKey && _isGrounded)
+        {
+            _isGrounded = false;
+            _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            PlayerActions.OnPlayerJump?.Invoke();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -67,6 +92,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag(PlayerActions.GroundTag))
         {
             _isGrounded = true;
+            PlayerActions.OnPlayerGrouded?.Invoke();
         }
     }
 }
