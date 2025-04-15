@@ -42,6 +42,7 @@ public class NexusEnergy : MonoBehaviour
             {
                 _currentEnergy = 0.0f;
             }
+            PlayerActions.OnPlayerEnergyChanged?.Invoke(_currentEnergy / _maxEnergy);
         }
     }
 

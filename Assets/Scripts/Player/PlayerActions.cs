@@ -17,4 +17,6 @@ public static class PlayerActions
     public static string GroundTag = "Ground";
 
     public static string PlayerTag = "Player";
+
+    public static Action<float> OnPlayerEnergyChanged;
 }
