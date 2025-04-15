@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private KeyCode _bostKey;
 
+    [SerializeField]
+    private KeyCode _echoKey;
+
     private void Update()
     {
         if (Input.GetKeyDown(_jumpKey))
@@ -38,6 +41,11 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyUp(_bostKey))
         {
             PlayerActions.OnPlayerMovementBoost?.Invoke();
+        }
+
+        if (Input.GetKeyDown(_echoKey))
+        {
+            EchoesActions.OnCreateEcho?.Invoke(transform.position);
         }
     }
 }

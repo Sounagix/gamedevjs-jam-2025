@@ -122,6 +122,85 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &47701444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 47701445}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &47701445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47701444}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 88174079}
+  m_Father: {fileID: 736590555}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &88174078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 88174079}
+  - component: {fileID: 88174080}
+  m_Layer: 0
+  m_Name: EchoesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &88174079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88174078}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47701445}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &88174080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88174078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9041d140bc75ae4cb6ac1d427f66b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _echoPrefab: {fileID: 680989082083870144, guid: 5804f7bfc016c2148beeb7c244bf11cd, type: 3}
+  _echoDuration: 2
+  _echoCost: 20
 --- !u!1 &122898143
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,6 +600,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1988638188}
+  - {fileID: 47701445}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &895425947
@@ -534,7 +614,7 @@ GameObject:
   - component: {fileID: 895425948}
   - component: {fileID: 895425950}
   - component: {fileID: 895425949}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plat
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -732,7 +812,7 @@ GameObject:
   - component: {fileID: 1402025115}
   - component: {fileID: 1402025117}
   - component: {fileID: 1402025116}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plat (2)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -978,7 +1058,7 @@ GameObject:
   - component: {fileID: 1674514057}
   - component: {fileID: 1674514059}
   - component: {fileID: 1674514058}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plat (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1149,7 +1229,7 @@ GameObject:
   - component: {fileID: 1709529577}
   - component: {fileID: 1709529580}
   - component: {fileID: 1709529581}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1239,6 +1319,7 @@ MonoBehaviour:
   _moveLeftKey: 97
   _moveRightKey: 100
   _bostKey: 113
+  _echoKey: 101
 --- !u!50 &1709529578
 Rigidbody2D:
   serializedVersion: 4
