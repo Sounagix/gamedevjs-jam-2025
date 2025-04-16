@@ -19,9 +19,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private KeyCode _echoKey;
 
-    [SerializeField]
-    private KeyCode _nexusShoot;
-
     private void Update()
     {
         if (Input.GetKeyDown(_jumpKey))
@@ -51,7 +48,7 @@ public class PlayerController : MonoBehaviour
             EchoesActions.OnCreateEcho?.Invoke(transform.position);
         }
 
-        if (Input.GetKeyDown(_nexusShoot))
+        if (Input.GetMouseButtonDown(0))
         {
             PlayerActions.OnPlayerShoot?.Invoke();
         }

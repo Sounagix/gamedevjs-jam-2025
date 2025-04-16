@@ -64,7 +64,8 @@ public class NexusWeapon : MonoBehaviour
         GameObject projectile = Instantiate(_projectilePrefab);
         projectile.transform.position = transform.position;
         NexusProjectile nexusProjectile = projectile.GetComponent<NexusProjectile>();
-        Vector2 dir = _player.GetDir();
+        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = (pos - (Vector2)transform.position).normalized;
         nexusProjectile.SetUp(dir, _projectileSpeed, _projectileLifeTime, _projectileDamage, _explosionRadius, _explosionForce);
         yield return new WaitForSeconds(_fireRate);
         _nexusShootCoroutine = null;
