@@ -23,4 +23,6 @@ public static class PlayerActions
     public static string EnemyTag = "Enemy";
 
     public static Action<float> OnPlayerEnergyChanged;
+
+    public static Action OnPlayerTouchCrystal;
 }
