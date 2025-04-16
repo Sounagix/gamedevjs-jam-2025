@@ -17,6 +17,7 @@ public class Life : MonoBehaviour
     public bool TakeDamage(float damage)
     {
         _currentLife -= damage;
+        BillboardManagerActions.OnBillboardCreated?.Invoke(transform.position, damage.ToString());
         return _currentLife <= 0;
     }
 

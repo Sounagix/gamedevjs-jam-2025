@@ -42,6 +42,9 @@ public class NexusProjectile : MonoBehaviour
             Rigidbody2D d = hit.GetComponent<Rigidbody2D>();
             if (d != null)
             {
+                Life life = d.gameObject.GetComponent<Life>();
+                if (life)
+                    life.TakeDamage(_damage);
                 d.AddForce(((Vector2)hit.transform.position - position).normalized * _explosionForce, ForceMode2D.Impulse);
             }
         }

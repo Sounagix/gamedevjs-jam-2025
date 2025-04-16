@@ -154,6 +154,7 @@ Transform:
   - {fileID: 88174079}
   - {fileID: 331224054}
   - {fileID: 1304364535}
+  - {fileID: 1873527310}
   m_Father: {fileID: 736590555}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &88174078
@@ -697,7 +698,7 @@ GameObject:
   - component: {fileID: 895425949}
   m_Layer: 7
   m_Name: Plat
-  m_TagString: Ground
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1001,7 +1002,7 @@ GameObject:
   - component: {fileID: 1402025116}
   m_Layer: 7
   m_Name: Plat (2)
-  m_TagString: Ground
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1015,7 +1016,7 @@ Transform:
   m_GameObject: {fileID: 1402025114}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: -2, z: 0}
+  m_LocalPosition: {x: 9.53, y: -1.91, z: 0}
   m_LocalScale: {x: 1, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1381,8 +1382,11 @@ GameObject:
   - component: {fileID: 1669432235}
   - component: {fileID: 1669432234}
   - component: {fileID: 1669432233}
+  - component: {fileID: 1669432239}
+  - component: {fileID: 1669432238}
+  - component: {fileID: 1669432237}
   m_Layer: 9
-  m_Name: Enemy
+  m_Name: Protector
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1517,6 +1521,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 842678312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1669432237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669432232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be27f56ad2bc034f85f693fc4052c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 2
+  _attackRange: 2
+  _attackDamage: 1
+  _attackCooldown: 1
+  _lureDistance: 3
+--- !u!114 &1669432238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669432232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3178d288be07e4daf487360ee97b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxLife: 50
+--- !u!58 &1669432239
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669432232}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
 --- !u!1 &1674514056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,7 +1599,7 @@ GameObject:
   - component: {fileID: 1674514058}
   m_Layer: 7
   m_Name: Plat (1)
-  m_TagString: Ground
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1544,7 +1613,7 @@ Transform:
   m_GameObject: {fileID: 1674514056}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
+  m_LocalPosition: {x: -8.23, y: 0.04, z: 0}
   m_LocalScale: {x: 1, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1914,6 +1983,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxLife: 100
+--- !u!1 &1873527309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1873527310}
+  - component: {fileID: 1873527311}
+  m_Layer: 0
+  m_Name: BillboardManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1873527310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873527309}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47701445}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1873527311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873527309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121f77ef296f87242bf365418dc4c23c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _billboardPrefab: {fileID: 7409780317904462784, guid: a873b8c87cec4924891cb894c1583a87, type: 3}
 --- !u!1 &1930483954
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,7 +2262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1172081661542927150, guid: 50c7af95b41b61f4e99d3e1e15edad35, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.04
+      value: 1.56
       objectReference: {fileID: 0}
     - target: {fileID: 1172081661542927150, guid: 50c7af95b41b61f4e99d3e1e15edad35, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2209,7 +2323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2947275667584790707, guid: a0a6af554361d054290fb06c0436e082, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.05
+      value: 1.47
       objectReference: {fileID: 0}
     - target: {fileID: 2947275667584790707, guid: a0a6af554361d054290fb06c0436e082, type: 3}
       propertyPath: m_LocalPosition.z

@@ -16,7 +16,7 @@ public static class PlayerActions
 
     public static Action OnPlayerShoot;
 
-    public static string GroundTag = "Ground";
+    public static string GroundTag = "Platform";
 
     public static string PlayerTag = "Player";
 

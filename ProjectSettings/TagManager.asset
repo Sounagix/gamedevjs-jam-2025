@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Projectile
   - Crystal
+  - Platform
   layers:
   - Default
   - TransparentFX
