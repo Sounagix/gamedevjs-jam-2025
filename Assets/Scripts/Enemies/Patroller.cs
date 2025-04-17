@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Patroller : MeleeEnemy
+public class Patroller : MovableEnemy
 {
     private CircleCollider2D _lureRange;
 
+    [SerializeField]
+    protected float _lureDistance;
 
     protected override void Awake()
     {
@@ -18,24 +20,5 @@ public class Patroller : MeleeEnemy
     {
         base.Start();
         StartPatrolling();
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag(PlayerActions.PlayerTag))
-        {
-            SetEnemy(collision.gameObject);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag(PlayerActions.PlayerTag))
-        {
-            StopAttacking();
-            StopMoving();
-            _state = STATE.PATROLING;
-        }
     }
 }

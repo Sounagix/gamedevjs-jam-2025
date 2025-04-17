@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Golem : Patroller
+public class Golem : MeleeEnemy
 {
     public override void TakeDamage(int damage, GameObject enemy)
     {

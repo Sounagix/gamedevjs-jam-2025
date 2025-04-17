@@ -18,15 +18,16 @@ public class MovableEnemy : Enemy
 
     protected float _distanceToStop;
 
-    protected Vector2 _dir;
+    protected Vector2 _dir = Vector2.right;
 
-    private bool _isFalling;
+    protected SpriteRenderer _spriteRenderer;
 
 
     protected override void Awake()
     {
         base.Awake();
         rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void SetTarget(GameObject target)
@@ -72,6 +73,7 @@ public class MovableEnemy : Enemy
             else
             {
                 _dir = -_dir;
+                _spriteRenderer.flipX = _dir.x < 0.0f;
                 rb.velocity = _dir * _speed;
             }
         
