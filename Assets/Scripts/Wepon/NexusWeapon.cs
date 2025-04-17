@@ -19,7 +19,7 @@ public class NexusWeapon : MonoBehaviour
     private float _fireRate;
 
     [SerializeField]
-    private float _projectileDamage;
+    private int _projectileDamage;
 
     [SerializeField]
     private float _projectileCost;

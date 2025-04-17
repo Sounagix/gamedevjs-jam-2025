@@ -8,6 +8,7 @@ public enum STATE
     ATTACK,
     MOVE,
     PATROLING,
+    FALLING,
     DIE
 }
 
@@ -22,6 +23,10 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Awake()
     {
         _life = GetComponent<Life>();
+    }
+
+    protected virtual void Start()
+    {
     }
 
     public virtual void TakeDamage(int damage, GameObject enemy)
