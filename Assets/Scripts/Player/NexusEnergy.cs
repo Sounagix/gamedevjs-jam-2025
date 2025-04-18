@@ -15,6 +15,8 @@ public class NexusEnergy : MonoBehaviour
 
     private float _currentEnergy;
 
+    public bool energyRegenerationAllowed = true;
+
     public static NexusEnergy instance;
 
     private Coroutine _restartEnergyCoroutine;
@@ -41,6 +43,21 @@ public class NexusEnergy : MonoBehaviour
         return _currentEnergy >= value;
     }
 
+    public void SetIsEnergyRegenerationAllowed(bool value)
+    {
+        energyRegenerationAllowed = value;
+
+        if (!energyRegenerationAllowed && _restartEnergyCoroutine != null)
+        {
+            StopCoroutine(_restartEnergyCoroutine);
+            _restartEnergyCoroutine = null;
+        }
+        else if (energyRegenerationAllowed && _currentEnergy < _maxEnergy && _restartEnergyCoroutine == null)
+        {
+            _restartEnergyCoroutine = StartCoroutine(AddEnergy());
+        }
+    }
+
     public void UseEnergy(float value)
     {
         if (CanUseEnergy(value))
@@ -51,7 +68,7 @@ public class NexusEnergy : MonoBehaviour
                 _currentEnergy = 0.0f;
             }
             PlayerActions.OnPlayerEnergyChanged?.Invoke(_currentEnergy / _maxEnergy);
-            if (_restartEnergyCoroutine == null)
+            if (energyRegenerationAllowed && (_restartEnergyCoroutine == null))
             {
                 _restartEnergyCoroutine = StartCoroutine(AddEnergy());
             }
@@ -67,9 +84,27 @@ public class NexusEnergy : MonoBehaviour
         }
     }
 
+    public float GetMaxEnergy()
+    {
+        return _maxEnergy;
+    }
+
+    public void SetMaxEnergy(float newMax)
+    {
+        _maxEnergy = newMax;
+        _currentEnergy = Mathf.Min(_currentEnergy, _maxEnergy);
+        PlayerActions.OnPlayerEnergyChanged?.Invoke(_currentEnergy / _maxEnergy);
+    }
+
     private IEnumerator AddEnergy()
     {
         yield return new WaitForSeconds(_energyRegenerationRate);
+
+        if (!energyRegenerationAllowed)
+        {
+            _restartEnergyCoroutine = null;
+            yield break;
+        }
 
         if (_currentEnergy < _maxEnergy)
         {

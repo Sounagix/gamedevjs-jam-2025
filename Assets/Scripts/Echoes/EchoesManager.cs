@@ -14,6 +14,8 @@ public class EchoesManager : MonoBehaviour
     [SerializeField]
     private float _echoCost;
 
+    private static bool echoAllowed = true;
+
     private void OnEnable()
     {
         EchoesActions.OnCreateEcho += CreateEcho;
@@ -26,11 +28,19 @@ public class EchoesManager : MonoBehaviour
 
     private void CreateEcho(Vector2 pos)
     {
-        if (NexusEnergy.instance.CanUseEnergy(_echoCost))
+        if (echoAllowed)
         {
-            NexusEnergy.instance.UseEnergy(_echoCost);
-            Echoes echo = Instantiate(_echoPrefab, pos, Quaternion.identity, transform).GetComponent<Echoes>();
-            echo.SetUp(_echoDuration);
+            if (NexusEnergy.instance.CanUseEnergy(_echoCost))
+            {
+                NexusEnergy.instance.UseEnergy(_echoCost);
+                Echoes echo = Instantiate(_echoPrefab, pos, Quaternion.identity, transform).GetComponent<Echoes>();
+                echo.SetUp(_echoDuration);
+            }
         }
+    }
+
+    public static void SetIsEchoAllowed(bool isEchoAllowed)
+    {
+        echoAllowed = isEchoAllowed;
     }
 }
