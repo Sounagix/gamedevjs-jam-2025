@@ -15,7 +15,7 @@ public class NexusEnergy : MonoBehaviour
 
     private float _currentEnergy;
 
-    private bool energyRegenerationAllowed = true;
+    public bool energyRegenerationAllowed = true;
 
     public static NexusEnergy instance;
 
@@ -82,6 +82,18 @@ public class NexusEnergy : MonoBehaviour
         {
             _currentEnergy = _maxEnergy;
         }
+    }
+
+    public float GetMaxEnergy()
+    {
+        return _maxEnergy;
+    }
+
+    public void SetMaxEnergy(float newMax)
+    {
+        _maxEnergy = newMax;
+        _currentEnergy = Mathf.Min(_currentEnergy, _maxEnergy);
+        PlayerActions.OnPlayerEnergyChanged?.Invoke(_currentEnergy / _maxEnergy);
     }
 
     private IEnumerator AddEnergy()
