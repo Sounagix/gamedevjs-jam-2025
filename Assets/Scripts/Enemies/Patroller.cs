@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,13 @@ public class Patroller : MovableEnemy
 
     [SerializeField]
     protected float _lureDistance;
+
+    [SerializeField]
+    private float _patrolSpeed = 1.0f;
+
+    private List<Vector2> _patrolPoints = new List<Vector2>();
+
+    private int _currentPatrolPointIndex = 0;
 
     protected override void Awake()
     {

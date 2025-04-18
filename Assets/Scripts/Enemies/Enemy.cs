@@ -18,6 +18,7 @@ public abstract class Enemy : MonoBehaviour
 {
     protected Life _life;
 
+    [SerializeField]
     protected STATE _state = STATE.IDLE;
 
     protected virtual void Awake()

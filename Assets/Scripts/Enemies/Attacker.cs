@@ -43,6 +43,7 @@ public class Attacker : Patroller
     {
         if (_attackCoroutine == null)
         {
+            _state = STATE.ATTACK;
             _attackCoroutine = StartCoroutine(AttackCoroutine());
         }
     }
