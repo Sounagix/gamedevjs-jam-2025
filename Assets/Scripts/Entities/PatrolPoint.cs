@@ -15,7 +15,7 @@ public class PatrolPoint : MonoBehaviour
     {
         if (collision.gameObject.Equals(_owner))
         {
-            collision.gameObject.GetComponent<Patroller>().NextPoint();
+            //collision.gameObject.GetComponent<Patroller>().NextPoint();
         }
     }
 }

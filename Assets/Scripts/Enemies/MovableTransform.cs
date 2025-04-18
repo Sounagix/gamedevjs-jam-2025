@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D;
 using UnityEngine;
 
 public class MovableTransform : Enemy
@@ -50,27 +51,14 @@ public class MovableTransform : Enemy
 
     protected virtual void LateUpdate()
     {
-        //if (_targetTr != null && !OnDistanceToStop() && rb.velocity.magnitude < _maxSpeed)
-        //{
-        //    _dir = (_targetTr.position - transform.position).x >= 0.0f ? Vector2.right : Vector2.left;
-        //    rb.velocity = _dir * _speed;
-        //}
-        //else if (_state.Equals(STATE.PATROLING) && rb.velocity.magnitude < _maxSpeed)
-        //{
-        //    Vector2 initpos = (Vector2)transform.position + (_dir * 1.5f);
-        //    Debug.DrawLine(initpos, initpos + (initpos * Vector2.down * 3.0f), Color.red, 0.1f);
-        //    RaycastHit2D hit = Physics2D.Raycast(initpos, Vector2.down, 3.0f, LayerMask.GetMask(PlayerActions.GroundTag));
-        //    if (hit && hit.collider.CompareTag(PlayerActions.GroundTag))
-        //    {
-        //        rb.velocity = _dir * _speed;
-        //    }
-        //    else
-        //    {
-        //        _dir = -_dir;
-        //        _spriteRenderer.flipX = _dir.x < 0.0f;
-        //        rb.velocity = _dir * _speed;
-        //    }
-
-        //}
+        if (_state.Equals(STATE.MOVE) && _targetTr  && !OnDistanceToStop())
+        {
+            _dir = (_targetTr.position - transform.position).normalized;
+            transform.position = transform.position + (Vector3)(_dir * _speed * Time.deltaTime);
+        }
+        else if (_targetTr && OnDistanceToStop())
+        {
+            _state = STATE.ATTACK;
+        }
     }
 }

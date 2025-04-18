@@ -14,14 +14,28 @@ public class FourDirPatroller : MovableTransform
     [SerializeField]
     private float _patrolPause;
 
+    private CircleCollider2D _lureRange;
+
+    [SerializeField]
+    protected float _lureDistance;
+
+
     private Coroutine _patrolCoroutine;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _lureRange = GetComponent<CircleCollider2D>();
+        _lureRange.radius = _lureDistance;
+    }
+
 
     protected override void Start()
     {
         base.Start();
         if (transform.childCount > 0)
         {
-            foreach (Transform child in transform)
+            foreach (Transform child in transform.GetChild(0))
             {
                 _patrolPoints.Add(child.position);
             }

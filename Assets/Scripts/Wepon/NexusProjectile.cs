@@ -16,13 +16,16 @@ public class NexusProjectile : MonoBehaviour
 
     private float _explosionForce;
 
-    public void SetUp(Vector2 dir, float speed, float lifeTime, int damage, float explosionRadius, float explosionForce)
+    private GameObject _owner;
+
+    public void SetUp(Vector2 dir, float speed, float lifeTime, int damage, float explosionRadius, float explosionForce, GameObject onwer)
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _damage = damage;
         _explosionRadius = explosionRadius;
         _explosionForce = explosionForce;
         _rigidbody.velocity = dir * speed;
+        _owner = onwer;
         Destroy(gameObject, lifeTime);
     }
 
@@ -44,8 +47,11 @@ public class NexusProjectile : MonoBehaviour
             {
                 Enemy currentEnemy = d.gameObject.GetComponent<Enemy>();
                 if (currentEnemy)
-                    currentEnemy.TakeDamage(_damage,gameObject);
-                d.AddForce(((Vector2)hit.transform.position - position).normalized * _explosionForce, ForceMode2D.Impulse);
+                    currentEnemy.TakeDamage(_damage,_owner);
+                if (d.gravityScale > 0.0f)
+                {
+                    d.AddForce(((Vector2)hit.transform.position - position).normalized * _explosionForce, ForceMode2D.Impulse);
+                }
             }
         }
         Destroy(gameObject);
