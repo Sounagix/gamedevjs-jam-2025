@@ -6,16 +6,16 @@ public class MeleeTrEnemy : AttackerTr
 {
     protected override IEnumerator AttackCoroutine()
     {
-        if (_enemy)
+        if (_enemy != null)
         {
-            _enemy.GetComponent<Life>().TakeDamage((int)_attackDamage);
+            _enemy.GetComponent<Player>().TakeDamage((int)_attackDamage);
             yield return new WaitForSeconds(_attackCooldown);
+            _attackCoroutine = null;
         }
         else
         {
             StopAttacking();
             StartPatrolling();
         }
-        _attackCoroutine = null;
     }
 }

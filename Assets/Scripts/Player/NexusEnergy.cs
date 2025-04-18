@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -120,5 +121,10 @@ public class NexusEnergy : MonoBehaviour
             PlayerActions.OnPlayerEnergyChanged?.Invoke(1f);
             _restartEnergyCoroutine = null;
         }
+    }
+
+    public void DrainEnergy()
+    {
+        _currentEnergy = 0;
     }
 }

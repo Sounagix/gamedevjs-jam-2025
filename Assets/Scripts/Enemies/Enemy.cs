@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,5 +41,15 @@ public abstract class Enemy : MonoBehaviour
     {
         // Implement enemy death logic here
         Destroy(gameObject);
+    }
+
+    public virtual void SetTaunt(GameObject taunter)
+    {
+        
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }

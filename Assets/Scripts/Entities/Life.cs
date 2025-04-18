@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,5 +29,10 @@ public class Life : MonoBehaviour
         {
             _currentLife = _maxLife;
         }
+    }
+
+    public void ResetLife()
+    {
+        _currentLife = _maxLife;
     }
 }

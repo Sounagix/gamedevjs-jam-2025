@@ -31,6 +31,11 @@ public class Attacker : Patroller
         SetTarget(enemy);
     }
 
+    public override void SetTaunt(GameObject taunter)
+    {
+        SetEnemy(taunter);
+    }
+
     protected void StopAttacking()
     {
         _enemy = null;
@@ -41,7 +46,7 @@ public class Attacker : Patroller
 
     public void Attack()
     {
-        if (_attackCoroutine == null)
+        if (_attackCoroutine == null && _enemy)
         {
             _state = STATE.ATTACK;
             _attackCoroutine = StartCoroutine(AttackCoroutine());
@@ -60,18 +65,46 @@ public class Attacker : Patroller
 
     protected override void LateUpdate()
     {
-        base.LateUpdate();
-        if (_enemy != null && _attackCoroutine == null && OnRangeAttack())
+        if (_enemy == null && !_state.Equals(STATE.PATROLING))
         {
-            _attackCoroutine = StartCoroutine(AttackCoroutine());
+            StartPatrolling();
+        }
+        else if (_enemy && _state.Equals(STATE.ATTACK))
+        {
+            if (_enemy && _attackCoroutine == null && OnRangeAttack())
+            {
+                _attackCoroutine = StartCoroutine(AttackCoroutine());
+            }
+            else
+            {
+                _state = STATE.MOVE;
+            }
+        }
+        else
+        {
+            base.LateUpdate();
         }
     }
 
     public override void TakeDamage(int damage, GameObject enemy)
     {
         base.TakeDamage(damage, enemy);
-        _enemy = enemy;
-        Attack();
+        if (enemy)
+        {
+            SetEnemy(enemy);
+            if (OnRangeAttack())
+            {
+                Attack();
+            }
+            else
+            {
+                _state = STATE.MOVE;
+            }
+        }
+        else
+        {
+            _state = STATE.PATROLING;
+        }
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -88,7 +121,7 @@ public class Attacker : Patroller
         {
             StopAttacking();
             StopMoving();
-            _state = STATE.PATROLING;
+            StartPatrolling();
         }
     }
 }

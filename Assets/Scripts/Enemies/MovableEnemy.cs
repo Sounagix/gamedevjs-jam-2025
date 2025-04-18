@@ -51,7 +51,10 @@ public class MovableEnemy : Enemy
 
     private bool OnDistanceToStop()
     {
-        return Vector2.Distance(transform.position, _targetTr.position) < _distanceToStop;
+        if (_targetTr == null)
+            return false;
+        float distance = Vector2.Distance(transform.position, _targetTr.position);
+        return distance < _distanceToStop;
     }
 
     protected virtual void LateUpdate()
@@ -60,6 +63,11 @@ public class MovableEnemy : Enemy
         {
             _dir = (_targetTr.position - transform.position).x >= 0.0f ? Vector2.right : Vector2.left;
             rb.velocity = _dir * _speed;
+        }
+        else if (_targetTr != null && OnDistanceToStop())
+        {
+            _state = STATE.ATTACK;
+            rb.velocity = Vector2.zero;
         }
         else if (_state.Equals(STATE.PATROLING) && rb.velocity.magnitude < _maxSpeed)
         {

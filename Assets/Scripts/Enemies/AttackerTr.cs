@@ -39,6 +39,11 @@ public class AttackerTr: FourDirPatroller
         _attackCoroutine = null;
     }
 
+    public override void SetTaunt(GameObject taunter)
+    {
+        SetEnemy(taunter);
+    }
+
     public void Attack()
     {
         if (_attackCoroutine == null && _enemy)

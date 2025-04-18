@@ -14,6 +14,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _maxSpeed;
 
+    [SerializeField]
+    private EchoesManager _echoesManager;
+
+    private Life _life;
+
     //Sin serializeField
 
     private Rigidbody2D _rigidbody2D;
@@ -47,6 +52,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _life = GetComponent<Life>();
     }
 
     private void Start()
@@ -103,5 +109,30 @@ public class Player : MonoBehaviour
     public Vector2 GetDir()
     {
         return _dir;
+    }
+
+    public void TakeDamage(float dmg)
+    {
+        if (_life.TakeDamage(dmg))
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Echoes lastEcho = _echoesManager.GetLastEcho();
+        if (lastEcho)
+        {
+            transform.position = lastEcho.transform.position;
+            _life.ResetLife();
+            NexusEnergy.instance.DrainEnergy();
+            EchoesActions.OnEchoDie?.Invoke(lastEcho);
+            Destroy(lastEcho.gameObject);
+        }
+        else
+        {
+            GameManager.Instance.LoadScene(SCENE.MAIN_MENU);
+        }
     }
 }

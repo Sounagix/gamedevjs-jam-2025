@@ -340,7 +340,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 0
-  _speed: 2
+  _speed: 4
   _maxSpeed: 3
-  _patrolSpeed: 5
+  _patrolSpeed: 2
   _patrolPause: 2
+  _lureDistance: 10
+  _attackRange: 3
+  _attackDamage: 1
+  _attackCooldown: 1

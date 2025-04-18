@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EchoesManager : MonoBehaviour
@@ -16,14 +17,18 @@ public class EchoesManager : MonoBehaviour
 
     private static bool echoAllowed = true;
 
+    private List<Echoes> _echoes = new List<Echoes>();
+
     private void OnEnable()
     {
         EchoesActions.OnCreateEcho += CreateEcho;
+        EchoesActions.OnEchoDie += RemoveEcho;
     }
 
     private void OnDisable()
     {
         EchoesActions.OnCreateEcho -= CreateEcho;
+        EchoesActions.OnEchoDie -= RemoveEcho;
     }
 
     private void CreateEcho(Vector2 pos)
@@ -34,6 +39,7 @@ public class EchoesManager : MonoBehaviour
             {
                 NexusEnergy.instance.UseEnergy(_echoCost);
                 Echoes echo = Instantiate(_echoPrefab, pos, Quaternion.identity, transform).GetComponent<Echoes>();
+                _echoes.Add(echo);
                 echo.SetUp(_echoDuration);
             }
         }
@@ -42,5 +48,18 @@ public class EchoesManager : MonoBehaviour
     public static void SetIsEchoAllowed(bool isEchoAllowed)
     {
         echoAllowed = isEchoAllowed;
+    }
+
+    public void RemoveEcho(Echoes echo)
+    {
+        if (_echoes.Contains(echo))
+        {
+            _echoes.Remove(echo);
+        }
+    }
+
+    public Echoes GetLastEcho()
+    {
+        return _echoes.Count > 0 ? _echoes[_echoes.Count - 1] : null;
     }
 }

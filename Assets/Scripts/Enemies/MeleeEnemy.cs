@@ -7,8 +7,11 @@ public class MeleeEnemy : Attacker
 {
     protected override IEnumerator AttackCoroutine()
     {
-        _enemy.GetComponent<Life>().TakeDamage((int)_attackDamage);
-        yield return new WaitForSeconds(_attackCooldown);
-        _attackCoroutine = null;
+        if (_enemy != null)
+        {
+            _enemy.GetComponent<Player>().TakeDamage((int)_attackDamage);
+            yield return new WaitForSecondsRealtime(_attackCooldown);
+            _attackCoroutine = null;
+        }        
     }
 }
