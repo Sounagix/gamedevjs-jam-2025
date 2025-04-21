@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public enum SCENE : int
 {
     MAIN_MENU = 0,
     GAME = 1,
+
     GAME_OVER = 2,
     GAME_WIN = 3,
     SETTINGS = 4,
@@ -34,5 +36,10 @@ public class GameManager : MonoBehaviour
     public void LoadScene(SCENE sCENE)
     {
         SceneManager.LoadScene((int)sCENE);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

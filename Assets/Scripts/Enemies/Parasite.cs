@@ -27,10 +27,24 @@ public class Parasite : Enemy
         _circleCollider2D.radius = _attackRange;
     }
 
+    public override void SetTaunt(GameObject taunter)
+    {
+        _enemy = taunter;
+        _state = STATE.ATTACK;
+        if(_attackCoroutine == null)
+            _attackCoroutine = StartCoroutine(Attack());
+        else
+        {
+            StopCoroutine(_attackCoroutine);
+            _attackCoroutine = null;
+            _attackCoroutine = StartCoroutine(Attack());
+        }
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(PlayerActions.PlayerTag))
+        if (collision.CompareTag(PlayerActions.PlayerTag) || collision.CompareTag(PlayerActions.EchoTag))
         {
             _enemy = collision.gameObject;
             _state = STATE.ATTACK;
@@ -40,7 +54,7 @@ public class Parasite : Enemy
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag(PlayerActions.PlayerTag))
+        if (collision.CompareTag(PlayerActions.PlayerTag) || collision.CompareTag(PlayerActions.EchoTag))
         {
             _enemy = null;
             _state = STATE.IDLE;
@@ -54,7 +68,19 @@ public class Parasite : Enemy
     {
         do
         {
-            _enemy.GetComponent<Player>().TakeDamage(_attackDamage);
+            Player player = _enemy.GetComponent<Player>();
+            if (player)
+            {
+                player.TakeDamage(_attackDamage);
+            }
+            else
+            {
+                Echoes echoes = _enemy.GetComponent<Echoes>();
+                if (echoes)
+                {
+                    echoes.TakeDamage(_attackDamage);
+                }
+            }
             yield return new WaitForSeconds(_attackCooldown);
         }
         while (OnRangeAttack());

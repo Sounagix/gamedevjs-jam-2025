@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 
     private Vector2 _dir;
 
+    private PlayerSounds _playerSounds;
+
     private void OnEnable()
     {
         PlayerActions.OnPlayerMovementBoost += HandleBost;
@@ -53,6 +55,7 @@ public class Player : MonoBehaviour
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _life = GetComponent<Life>();
+        _playerSounds = GetComponent<PlayerSounds>();
     }
 
     private void Start()
@@ -113,6 +116,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+        _playerSounds.PlaySound(PLAYER_SOUNDS.HURT);
         if (_life.TakeDamage(dmg))
         {
             Die();
@@ -124,6 +128,7 @@ public class Player : MonoBehaviour
         Echoes lastEcho = _echoesManager.GetLastEcho();
         if (lastEcho)
         {
+            _playerSounds.PlaySound(PLAYER_SOUNDS.SPAWN);
             transform.position = lastEcho.transform.position;
             _life.ResetLife();
             NexusEnergy.instance.DrainEnergy();
@@ -132,7 +137,9 @@ public class Player : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.LoadScene(SCENE.MAIN_MENU);
+            _playerSounds.PlaySound(PLAYER_SOUNDS.SPAWN);
+            // Add time for animation and sound
+            GameManager.Instance.LoadScene(SCENE.GAME_OVER);
         }
     }
 }

@@ -8,7 +8,19 @@ public class MeleeTrEnemy : AttackerTr
     {
         if (_enemy != null)
         {
-            _enemy.GetComponent<Player>().TakeDamage((int)_attackDamage);
+            Player player = _enemy.GetComponent<Player>();
+            if (player)
+            {
+                player.TakeDamage((int)_attackDamage);
+            }
+            else
+            {
+                Echoes echoes = _enemy.GetComponent<Echoes>();
+                if (echoes)
+                {
+                    echoes.TakeDamage((int)_attackDamage);
+                }
+            }
             yield return new WaitForSeconds(_attackCooldown);
             _attackCoroutine = null;
         }
