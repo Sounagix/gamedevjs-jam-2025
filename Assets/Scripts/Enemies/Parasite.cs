@@ -16,6 +16,8 @@ public class Parasite : Enemy
 
     private GameObject _enemy;
 
+    private List<GameObject> _enemies = new();
+
     private Coroutine _attackCoroutine;
 
     private CircleCollider2D _circleCollider2D;
@@ -29,26 +31,45 @@ public class Parasite : Enemy
 
     public override void SetTaunt(GameObject taunter)
     {
+        if (_enemy != null && !_enemies.Contains(_enemy))
+        {
+            _enemies.Add(_enemy);
+        }    
         _enemy = taunter;
         _state = STATE.ATTACK;
         if(_attackCoroutine == null)
             _attackCoroutine = StartCoroutine(Attack());
         else
         {
-            StopCoroutine(_attackCoroutine);
-            _attackCoroutine = null;
-            _attackCoroutine = StartCoroutine(Attack());
+            ResetAttack();
         }
     }
 
+    private void ResetAttack()
+    {
+        StopCoroutine(_attackCoroutine);
+        _attackCoroutine = null;
+        _attackCoroutine = StartCoroutine(Attack());
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag(PlayerActions.PlayerTag) || collision.CompareTag(PlayerActions.EchoTag))
         {
-            _enemy = collision.gameObject;
-            _state = STATE.ATTACK;
-            _attackCoroutine = StartCoroutine(Attack());
+            if(_enemy != null)
+            {
+                if (!_enemies.Contains(collision.gameObject))
+                {
+                    _enemies.Add(collision.gameObject);
+                }
+                _enemy = GetCloserEnemy();
+            }
+            else
+            {
+                _enemy = collision.gameObject;
+                _state = STATE.ATTACK;
+                _attackCoroutine = StartCoroutine(Attack());
+            }
         }
     }
 
@@ -56,10 +77,26 @@ public class Parasite : Enemy
     {
         if (collision.CompareTag(PlayerActions.PlayerTag) || collision.CompareTag(PlayerActions.EchoTag))
         {
-            _enemy = null;
-            _state = STATE.IDLE;
-            if (_attackCoroutine != null)
-                StopCoroutine(_attackCoroutine);
+            if (_enemies.Contains(collision.gameObject))
+            {
+                _enemies.Remove(collision.gameObject);
+            }
+
+            if (_enemy && _enemy.Equals(collision.gameObject))
+            {
+                if (_enemy.Equals(collision.gameObject) && _enemies.Count > 0)
+                {
+                    _enemy = GetCloserEnemy();
+
+                }
+                else
+                {
+                    _enemy = null;
+                    _state = STATE.IDLE;
+                    if (_attackCoroutine != null)
+                        StopCoroutine(_attackCoroutine);
+                }
+            }
         }
     }
 
@@ -83,7 +120,7 @@ public class Parasite : Enemy
             }
             yield return new WaitForSeconds(_attackCooldown);
         }
-        while (OnRangeAttack());
+        while (_enemy && OnRangeAttack());
         _state = STATE.IDLE;
         _attackCoroutine = null;
     }
@@ -91,5 +128,24 @@ public class Parasite : Enemy
     private bool OnRangeAttack()
     {
         return _enemy != null && Vector2.Distance(transform.position, _enemy.transform.position) <= _attackRange;
+    }
+
+    private GameObject GetCloserEnemy()
+    {
+        GameObject closestEnemy = null;
+        float shortestDistance = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+
+        foreach (GameObject enemy in _enemies)
+        {
+            float distance = Vector3.Distance(currentPosition, enemy.transform.position);
+            if (distance < shortestDistance && distance <= _attackRange)
+            {
+                shortestDistance = distance;
+                closestEnemy = enemy;
+            }
+        }
+
+        return closestEnemy;
     }
 }

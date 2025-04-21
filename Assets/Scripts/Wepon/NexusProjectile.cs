@@ -45,9 +45,20 @@ public class NexusProjectile : MonoBehaviour
             Rigidbody2D d = hit.GetComponent<Rigidbody2D>();
             if (d != null)
             {
-                Enemy currentEnemy = d.gameObject.GetComponent<Enemy>();
-                if (currentEnemy)
-                    currentEnemy.TakeDamage(_damage,_owner);
+                if (d.TryGetComponent(out Enemy currentEnemy))
+                {
+                    currentEnemy.TakeDamage(_damage, _owner);
+                }
+                else if (d.gameObject.TryGetComponent(out Player player))
+                {
+                    player.TakeDamage(_damage);
+                }
+                else if (d.gameObject.TryGetComponent(out Echoes echo))
+                {
+                    echo.TakeDamage(_damage);
+                }
+
+
                 if (d.gravityScale > 0.0f)
                 {
                     d.AddForce(((Vector2)hit.transform.position - position).normalized * _explosionForce, ForceMode2D.Impulse);

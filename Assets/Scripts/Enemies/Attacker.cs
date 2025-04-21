@@ -17,7 +17,7 @@ public class Attacker : Patroller
 
     protected Coroutine _attackCoroutine;
 
-
+    protected List<GameObject> _enemies = new();
 
     protected override void Awake()
     {
@@ -33,7 +33,25 @@ public class Attacker : Patroller
 
     public override void SetTaunt(GameObject taunter)
     {
+        if (_enemy != null && !_enemies.Contains(_enemy))
+        {
+            _enemies.Add(_enemy);
+        }
         SetEnemy(taunter);
+        _state = STATE.ATTACK;
+        if (_attackCoroutine == null)
+            _attackCoroutine = StartCoroutine(AttackCoroutine());
+        else
+        {
+            ResetAttack();
+        }
+    }
+
+    private void ResetAttack()
+    {
+        StopCoroutine(_attackCoroutine);
+        _attackCoroutine = null;
+        _attackCoroutine = StartCoroutine(AttackCoroutine());
     }
 
     protected void StopAttacking()
@@ -109,19 +127,71 @@ public class Attacker : Patroller
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(PlayerActions.PlayerTag))
+        if (collision.CompareTag(PlayerActions.PlayerTag) || collision.CompareTag(PlayerActions.EchoTag))
         {
-            SetEnemy(collision.gameObject);
+            if (_enemy != null)
+            {
+                if (!_enemies.Contains(collision.gameObject))
+                {
+                    _enemies.Add(collision.gameObject);
+                }
+                _enemy = GetCloserEnemy();
+            }
+            else
+            {
+                _enemy = collision.gameObject;
+                _state = STATE.ATTACK;
+                _attackCoroutine = StartCoroutine(AttackCoroutine());
+            }
         }
     }
 
     protected virtual void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag(PlayerActions.PlayerTag))
+        if (collision.CompareTag(PlayerActions.PlayerTag) || collision.CompareTag(PlayerActions.EchoTag))
         {
-            StopAttacking();
-            StopMoving();
-            StartPatrolling();
+            if (_enemies.Contains(collision.gameObject))
+            {
+                _enemies.Remove(collision.gameObject);
+            }
+
+            if (_enemy && _enemy.Equals(collision.gameObject))
+            {
+                if (_enemy.Equals(collision.gameObject) && _enemies.Count > 0)
+                {
+                    _enemy = GetCloserEnemy();
+
+                }
+                else
+                {
+                    _enemy = null;
+                    _state = STATE.IDLE;
+                    if (_attackCoroutine != null)
+                        StopCoroutine(_attackCoroutine);
+                    StopAttacking();
+                    StopMoving();
+                    StartPatrolling();
+                }
+            }
         }
+    }
+
+    private GameObject GetCloserEnemy()
+    {
+        GameObject closestEnemy = null;
+        float shortestDistance = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+
+        foreach (GameObject enemy in _enemies)
+        {
+            float distance = Vector3.Distance(currentPosition, enemy.transform.position);
+            if (distance < shortestDistance && distance <= _attackRange)
+            {
+                shortestDistance = distance;
+                closestEnemy = enemy;
+            }
+        }
+
+        return closestEnemy;
     }
 }
