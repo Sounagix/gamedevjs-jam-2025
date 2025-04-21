@@ -11,8 +11,8 @@ public enum SCENE : int
 
     GAME_OVER = 2,
     GAME_WIN = 3,
-    SETTINGS = 4,
-    CREDITS = 5
+    CREDITS = 4,
+    SETTINGS = 5
 }
 
 public class GameManager : MonoBehaviour
