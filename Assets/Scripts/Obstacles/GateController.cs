@@ -14,16 +14,32 @@ public class GateController : MonoBehaviour
 
     private Collider2D gateCollider;
 
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private GameObject gate;
+
+    [SerializeField]
+    private Sprite closedSprite;
+
+    [SerializeField]
+    private Sprite openSprite;
+
     private void Awake()
     {
-        gateCollider = GetComponentInChildren<Collider2D>();
+        gateCollider = gate.GetComponent<Collider2D>();
+        spriteRenderer = gate.GetComponent<SpriteRenderer>();
     }
 
     public void SetGateState(GateState newState)
     {
         if (newState == CurrentState) return;
         CurrentState = newState;
-        bool isTrigger = (newState == GateState.Open);
-        gateCollider.isTrigger = isTrigger; // Make gate pass-through when open
+        gateCollider.isTrigger = (newState == GateState.Open); // Make gate pass-through when open
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = (newState == GateState.Open) ? openSprite : closedSprite; // USe the open sprite when gate is open else close
+        }
     }
 }
