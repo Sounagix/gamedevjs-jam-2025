@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
 
     private PlayerSounds _playerSounds;
 
+    private Animator _animator;
+
     private void OnEnable()
     {
         PlayerActions.OnPlayerMovementBoost += HandleBost;
@@ -56,6 +58,7 @@ public class Player : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _life = GetComponent<Life>();
         _playerSounds = GetComponent<PlayerSounds>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -79,6 +82,7 @@ public class Player : MonoBehaviour
     private void PlayerJumping()
     {
         _isGrounded = false;
+        _animator.SetBool("Grounded", _isGrounded);
     }
 
     private void HandleRightMove()
@@ -97,6 +101,7 @@ public class Player : MonoBehaviour
             _isGrounded = false;
             _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
             PlayerActions.OnPlayerJump?.Invoke();
+            _animator.SetBool("Grounded", _isGrounded);
         }
     }
 
@@ -106,6 +111,7 @@ public class Player : MonoBehaviour
         {
             _isGrounded = true;
             PlayerActions.OnPlayerGrouded?.Invoke();
+            _animator.SetBool("Grounded", _isGrounded);
         }
     }
 

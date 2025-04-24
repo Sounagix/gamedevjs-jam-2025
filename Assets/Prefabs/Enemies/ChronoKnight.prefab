@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1525648809484933253}
   - component: {fileID: 7203675836179759069}
   - component: {fileID: 7519795246499945617}
+  - component: {fileID: 736866810800524515}
   m_Layer: 9
   m_Name: ChronoKnight
   m_TagString: Enemy
@@ -30,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6915498959923470660}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.84, y: 0.24, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: efc67e516cedf11478293d9fbb50596c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4bdf595bba4004744ad0018e97d330c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -211,11 +212,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3c5015424965e469cab943a425e724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _state: 0
   _speed: 2
   _maxSpeed: 3
   _lureDistance: 10
+  _patrolSpeed: 1
   _attackRange: 7
   _attackDamage: 10
   _attackCooldown: 2
   _projectileSpeed: 10
   _projectilePrefab: {fileID: 5713121303079006776, guid: e58e66a61e6769e4ebafa0b11226b69b, type: 3}
+--- !u!95 &736866810800524515
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6915498959923470660}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21935f9783d816642ada42a4e4dbf118, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -32,6 +32,8 @@ public class NexusWeapon : MonoBehaviour
 
     private Player _player;
 
+    private Animator _animator;
+
     private Coroutine _nexusShootCoroutine;
 
     private void OnEnable()
@@ -47,6 +49,7 @@ public class NexusWeapon : MonoBehaviour
     private void Awake()
     {
         _player = transform.parent.gameObject.GetComponent<Player>();
+        _animator = transform.parent.gameObject.GetComponent<Animator>();
     }
 
 
@@ -54,8 +57,10 @@ public class NexusWeapon : MonoBehaviour
     {
         if (_nexusShootCoroutine == null && NexusEnergy.instance.CanUseEnergy(_projectileCost))
         {
+            _animator.SetBool("Attacking", true);
             NexusEnergy.instance.UseEnergy(_projectileCost);
             _nexusShootCoroutine = StartCoroutine(ShootCoroutine());
+            _animator.SetBool("Attacking", false);
         }
     }
 

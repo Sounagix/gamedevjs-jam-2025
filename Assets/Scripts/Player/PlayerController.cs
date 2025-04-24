@@ -19,8 +19,30 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private KeyCode _echoKey;
 
+    private Animator _animator;
+    private Rigidbody2D _rb;
+    private SpriteRenderer _spriteRenderer;
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void Update()
     {
+        _animator.SetFloat("Speed", Mathf.Abs(_rb.velocity.x));
+
+        if (_rb.velocity.x < 0)
+        {
+            _spriteRenderer.flipX = true;
+        } 
+        else if (_rb.velocity.x > 0)
+        {
+            _spriteRenderer.flipX = false;
+        }
+
         if (Input.GetKeyDown(_jumpKey))
         {
               PlayerActions.OnPlayerJump?.Invoke();
