@@ -12,6 +12,9 @@ public class HUD : MonoBehaviour
     [SerializeField] 
     private Scrollbar _healthbar;
 
+    [SerializeField]
+    private Button _mainMenu;
+
     [SerializeField] 
     private Life _playerLife;
 
@@ -43,6 +46,12 @@ public class HUD : MonoBehaviour
         _energyBar.size = 1.0f;
         _healthbar.size = 1.0f;
         _crystalCounterText.text = "0";
+        _mainMenu.onClick.AddListener(OnMainMenuClick);
+    }
+
+    private void OnMainMenuClick()
+    {
+        LevelSceneManager.instance.LoadScene("MainMenu");
     }
 
     private void UpdateEnergyBar(float value)
