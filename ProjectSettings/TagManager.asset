@@ -11,6 +11,7 @@ TagManager:
   - Crystal
   - Platform
   - Obstacle
+  - Explosion
   layers:
   - Default
   - TransparentFX
@@ -47,4 +48,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: 1
+    uniqueID: 258008005
+    locked: 0
+  - name: 2
+    uniqueID: 3969732669
+    locked: 0
+  - name: 3
+    uniqueID: 2480330581
     locked: 0

@@ -27,4 +27,6 @@ public static class PlayerActions
     public static Action<float> OnPlayerEnergyChanged;
 
     public static Action OnPlayerTouchCrystal;
+
+    public static Action<float> OnPlayerHealthChanged;
 }
