@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 public enum SCENE : int
 {
     MAIN_MENU = 0,
-    GAME = 1,
+    GAME = 4,
 
     GAME_OVER = 2,
-    GAME_WIN = 3,
-    CREDITS = 4,
-    SETTINGS = 5
+    GAME_WIN = 99,
+    CREDITS = 3,
+    SETTINGS = 98
 }
 
 public class GameManager : MonoBehaviour

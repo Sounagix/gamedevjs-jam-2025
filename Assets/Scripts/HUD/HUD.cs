@@ -9,16 +9,29 @@ public class HUD : MonoBehaviour
     [SerializeField]
     private Scrollbar _energyBar;
 
+    [SerializeField] 
+    private Scrollbar _healthbar;
+
+    [SerializeField]
+    private Button _mainMenu;
+
+    [SerializeField] 
+    private Life _playerLife;
+
     [SerializeField]
     private TMPro.TextMeshProUGUI _crystalCounterText;
 
     private int _numOfCrystals = 0;
 
+    private void Update()
+    {
+        UpdateHealthBar((_playerLife._currentLife / _playerLife._maxLife));
+    }
+
     private void OnEnable()
     {
         PlayerActions.OnPlayerEnergyChanged += UpdateEnergyBar;
-        PlayerActions.OnPlayerTouchCrystal += UpdateCrystalCounter;
-    }
+        PlayerActions.OnPlayerTouchCrystal += UpdateCrystalCounter;    }
 
 
 
@@ -31,7 +44,14 @@ public class HUD : MonoBehaviour
     private void Start()
     {
         _energyBar.size = 1.0f;
+        _healthbar.size = 1.0f;
         _crystalCounterText.text = "0";
+        _mainMenu.onClick.AddListener(OnMainMenuClick);
+    }
+
+    private void OnMainMenuClick()
+    {
+        LevelSceneManager.instance.LoadScene("MainMenu");
     }
 
     private void UpdateEnergyBar(float value)
@@ -43,5 +63,10 @@ public class HUD : MonoBehaviour
     {
         _numOfCrystals++;
         _crystalCounterText.text = _numOfCrystals.ToString();
+    }
+
+    private void UpdateHealthBar(float value)
+    {
+        _healthbar.size = value;
     }
 }

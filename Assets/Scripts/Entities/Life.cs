@@ -6,9 +6,9 @@ using UnityEngine;
 public class Life : MonoBehaviour
 {
     [SerializeField]
-    private float _maxLife;
+    public float _maxLife;
 
-    private float _currentLife;
+    public float _currentLife;
 
     private void Start()
     {
