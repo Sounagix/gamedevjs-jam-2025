@@ -213,13 +213,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3c5015424965e469cab943a425e724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
+  _state: 3
   _speed: 2
   _maxSpeed: 3
   _lureDistance: 10
   _patrolSpeed: 1
   _attackRange: 7
-  _attackDamage: 10
+  _attackDamage: 20
   _attackCooldown: 2
   _projectileSpeed: 10
   _projectilePrefab: {fileID: 5713121303079006776, guid: e58e66a61e6769e4ebafa0b11226b69b, type: 3}

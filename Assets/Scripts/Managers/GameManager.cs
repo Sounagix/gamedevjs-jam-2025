@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [SerializeField]
+    public Animator transitionAnim;
 
     private void Awake()
     {
@@ -32,7 +35,16 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(SCENE sCENE)
     {
+        StartCoroutine(LoadSceneCoroutine(sCENE));
+    }
+
+    private IEnumerator LoadSceneCoroutine(SCENE sCENE)
+    {
+        transitionAnim.SetTrigger("End");
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene((int)sCENE);
+        transitionAnim.SetTrigger("Start");
+
     }
 
     public void QuitGame()

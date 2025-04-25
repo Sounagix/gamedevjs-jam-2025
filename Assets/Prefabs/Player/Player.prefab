@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7833205650706662779}
-  - component: {fileID: 4853871779274205317}
-  - component: {fileID: 5838490834520990972}
+  - component: {fileID: 893298188319088375}
+  - component: {fileID: 3911665284881251056}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -33,7 +33,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6375046965733815719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &4853871779274205317
+--- !u!81 &893298188319088375
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024985207630915451}
+  m_Enabled: 1
+--- !u!20 &3911665284881251056
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,14 +92,6 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5838490834520990972
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1024985207630915451}
-  m_Enabled: 1
 --- !u!1 &5346483621980651869
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b2cb960fb41ac84e9c4f0570506810c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxEnergy: 20
+  _maxEnergy: 30
   _energyRegenerationRate: 1
   _energyPercentageRegeneration: 0.1
   energyRegenerationAllowed: 1
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeToWaitForBoost: 1
   _boostJumpForce: 10
-  _boostSlideForce: 10
+  _boostSlideForce: 20
   _boostSlideEnergyCost: 10
   _boostJumpEnergyCost: 10
 --- !u!114 &5240967386150350129
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3178d288be07e4daf487360ee97b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLife: 20
+  _maxLife: 200
   _currentLife: 0
 --- !u!114 &8720415339316607608
 MonoBehaviour:
@@ -467,6 +467,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 19695080f842d924a83ba8e7b61e76cb, type: 3}
   - {fileID: 8300000, guid: 541ed4c9a6fa2ef4a87ccb0ce3f4d64d, type: 3}
   - {fileID: 8300000, guid: e555f4e00e2256740896214e8b22e5f8, type: 3}
+  - {fileID: 8300000, guid: 1b2ef50f98d512d46909189f5ddaed2a, type: 3}
 --- !u!1 &8375478644266994016
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,7 +515,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 5769967084508751499, guid: 3d9ddc5728438ae4ba77deea6a98ec74, type: 3}
   _projectileSpeed: 20
   _projectileLifeTime: 2
-  _fireRate: 2
+  _fireRate: 1
   _projectileDamage: 10
   _projectileCost: 5
   _explosionRadius: 3

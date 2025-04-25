@@ -348,7 +348,7 @@ MonoBehaviour:
   _patrolPause: 2
   _lureDistance: 10
   _attackRange: 3
-  _attackDamage: 1
+  _attackDamage: 10
   _attackCooldown: 1
 --- !u!95 &973661527246060317
 Animator:

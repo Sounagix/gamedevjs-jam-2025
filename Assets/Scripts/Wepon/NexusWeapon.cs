@@ -57,11 +57,11 @@ public class NexusWeapon : MonoBehaviour
     {
         if (_nexusShootCoroutine == null && NexusEnergy.instance.CanUseEnergy(_projectileCost))
         {
+            _animator.SetBool("CanJump", false);
             _playerSounds.PlayOnShot(PLAYER_SOUNDS.SHOT);
             _animator.SetBool("Attacking", true);
             NexusEnergy.instance.UseEnergy(_projectileCost);
             _nexusShootCoroutine = StartCoroutine(ShootCoroutine());
-            _animator.SetBool("Attacking", false);
         }
     }
 
@@ -75,5 +75,13 @@ public class NexusWeapon : MonoBehaviour
         nexusProjectile.SetUp(dir, _projectileSpeed, _projectileLifeTime, _projectileDamage, _explosionRadius, _explosionForce, transform.parent.gameObject);
         yield return new WaitForSeconds(_fireRate);
         _nexusShootCoroutine = null;
+        StartCoroutine(ResetAttackingAnim(0.3f));
+    }
+
+    private IEnumerator ResetAttackingAnim(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        _animator.SetBool("Attacking", false);
+        _animator.SetBool("CanJump", true);
     }
 }
