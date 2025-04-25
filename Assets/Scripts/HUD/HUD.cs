@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,13 +6,13 @@ public class HUD : MonoBehaviour
     [SerializeField]
     private Scrollbar _energyBar;
 
-    [SerializeField] 
+    [SerializeField]
     private Scrollbar _healthbar;
 
     [SerializeField]
     private Button _mainMenu;
 
-    [SerializeField] 
+    [SerializeField]
     private Life _playerLife;
 
     [SerializeField]
@@ -31,7 +28,8 @@ public class HUD : MonoBehaviour
     private void OnEnable()
     {
         PlayerActions.OnPlayerEnergyChanged += UpdateEnergyBar;
-        PlayerActions.OnPlayerTouchCrystal += UpdateCrystalCounter;    }
+        PlayerActions.OnPlayerTouchCrystal += UpdateCrystalCounter;
+    }
 
 
 

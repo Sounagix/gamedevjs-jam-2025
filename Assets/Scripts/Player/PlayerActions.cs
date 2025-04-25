@@ -21,7 +21,7 @@ public static class PlayerActions
     public static string PlayerTag = "Player";
 
     public static string EnemyTag = "Enemy";
-    
+
     public static string EchoTag = "Echo";
 
     public static Action<float> OnPlayerEnergyChanged;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -37,7 +35,7 @@ public class PlayerController : MonoBehaviour
         if (_rb.velocity.x < 0)
         {
             _spriteRenderer.flipX = true;
-        } 
+        }
         else if (_rb.velocity.x > 0)
         {
             _spriteRenderer.flipX = false;
@@ -45,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(_jumpKey))
         {
-              PlayerActions.OnPlayerJump?.Invoke();
+            PlayerActions.OnPlayerJump?.Invoke();
         }
         if (Input.GetKey(_moveLeftKey))
         {

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum STATE
@@ -45,7 +42,7 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void SetTaunt(GameObject taunter)
     {
-        
+
     }
 
     private void OnDestroy()

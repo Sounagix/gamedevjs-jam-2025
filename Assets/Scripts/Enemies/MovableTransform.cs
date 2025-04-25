@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.U2D;
 using UnityEngine;
 
 public class MovableTransform : Enemy
@@ -51,7 +48,7 @@ public class MovableTransform : Enemy
 
     protected virtual void LateUpdate()
     {
-        if (_state.Equals(STATE.MOVE) && _targetTr  && !OnDistanceToStop())
+        if (_state.Equals(STATE.MOVE) && _targetTr && !OnDistanceToStop())
         {
             _dir = (_targetTr.position - transform.position).normalized;
             transform.position = transform.position + (Vector3)(_dir * _speed * Time.deltaTime);

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -87,7 +84,7 @@ public class MovableEnemy : Enemy
                 _spriteRenderer.flipX = _dir.x < 0.0f;
                 rb.velocity = _dir * _speed;
             }
-        
+
         }
     }
 }

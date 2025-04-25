@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackerTr: FourDirPatroller
+public class AttackerTr : FourDirPatroller
 {
     [SerializeField]
     protected float _attackRange;

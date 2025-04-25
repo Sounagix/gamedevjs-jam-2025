@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class MeleeEnemy : Attacker
@@ -9,7 +7,7 @@ public class MeleeEnemy : Attacker
     {
         if (_enemy != null)
         {
-            if(_animator)
+            if (_animator)
                 _animator.SetTrigger("Attack");
             Player player = _enemy.GetComponent<Player>();
             if (player)
@@ -27,6 +25,6 @@ public class MeleeEnemy : Attacker
 
             yield return new WaitForSecondsRealtime(_attackCooldown);
             _attackCoroutine = null;
-        }        
+        }
     }
 }

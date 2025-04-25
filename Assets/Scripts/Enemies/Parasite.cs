@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,10 +36,10 @@ public class Parasite : Enemy
         if (_enemy != null && !_enemies.Contains(_enemy))
         {
             _enemies.Add(_enemy);
-        }    
+        }
         _enemy = taunter;
         _state = STATE.ATTACK;
-        if(_attackCoroutine == null)
+        if (_attackCoroutine == null)
             _attackCoroutine = StartCoroutine(Attack());
         else
         {
@@ -59,7 +58,7 @@ public class Parasite : Enemy
     {
         if (collision.CompareTag(PlayerActions.PlayerTag) || collision.CompareTag(PlayerActions.EchoTag))
         {
-            if(_enemy != null)
+            if (_enemy != null)
             {
                 if (!_enemies.Contains(collision.gameObject))
                 {
@@ -108,7 +107,7 @@ public class Parasite : Enemy
     {
         do
         {
-            if(_animator)
+            if (_animator)
                 _animator.SetTrigger("Attack");
             Player player = _enemy.GetComponent<Player>();
             if (player)

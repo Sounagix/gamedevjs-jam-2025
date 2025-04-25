@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
@@ -17,7 +15,7 @@ public class PressurePlate : MonoBehaviour
     private void Awake()
     {
         gateController = GetComponentInParent<GateController>();
-        spriteRenderer = GetComponent<SpriteRenderer>();    
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
     }
 

@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementBost : MonoBehaviour
@@ -118,7 +116,7 @@ public class MovementBost : MonoBehaviour
     {
         _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
         yield return new WaitForSeconds(_timeToWaitForBoost);
-        _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;   
+        _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         _rigidbody2D.AddForce(Vector2.right * _boostSlideForce, ForceMode2D.Impulse);
         _slideRightCoroutine = null;
     }

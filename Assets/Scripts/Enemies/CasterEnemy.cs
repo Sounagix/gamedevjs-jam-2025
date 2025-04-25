@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CasterEnemy : Attacker
@@ -12,7 +11,7 @@ public class CasterEnemy : Attacker
 
     protected override IEnumerator AttackCoroutine()
     {
-        if(_animator)
+        if (_animator)
             _animator.SetTrigger("Attack");
         Vector2 dir = (_enemy.transform.position - transform.position).normalized;
         GameObject projectile = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
