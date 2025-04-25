@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.872, y: -0.926, z: 0.036730945}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.53, y: 1.4652001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6cb27bb32ae99d4ea34fb8a224c229d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 1
-  damage: 5
+  _cooldown: 1
+  _damage: 5
 --- !u!95 &4321284014393389589
 Animator:
   serializedVersion: 5

@@ -14563,14 +14563,6 @@ PrefabInstance:
       value: Flames
       objectReference: {fileID: 0}
     - target: {fileID: 7185550767228978800, guid: 9582e564c5499bc4c81a13e913945cf4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.53
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185550767228978800, guid: 9582e564c5499bc4c81a13e913945cf4, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.4652001
-      objectReference: {fileID: 0}
-    - target: {fileID: 7185550767228978800, guid: 9582e564c5499bc4c81a13e913945cf4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.938
       objectReference: {fileID: 0}
