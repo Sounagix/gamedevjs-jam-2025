@@ -15,6 +15,15 @@ public class HUD : MonoBehaviour
     [SerializeField]
     private Button _mainMenu;
 
+    [SerializeField]
+    private GameObject _controlMenu;
+
+    [SerializeField]
+    private Button _controlButton;
+
+    [SerializeField]
+    private Button _backControlButton;
+
     [SerializeField] 
     private Life _playerLife;
 
@@ -47,6 +56,18 @@ public class HUD : MonoBehaviour
         _healthbar.size = 1.0f;
         _crystalCounterText.text = "0";
         _mainMenu.onClick.AddListener(OnMainMenuClick);
+        _controlButton.onClick.AddListener(OnControlButtonClick);
+        _backControlButton.onClick.AddListener(OnBackControlButtonClick);
+    }
+
+    private void OnControlButtonClick()
+    {
+        _controlMenu.SetActive(true);
+    }
+
+    private void OnBackControlButtonClick()
+    {
+        _controlMenu.SetActive(false);
     }
 
     private void OnMainMenuClick()

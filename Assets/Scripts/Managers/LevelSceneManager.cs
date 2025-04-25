@@ -22,11 +22,27 @@ public class LevelSceneManager : MonoBehaviour
 
     public void NextLevel()
     {
+        StartCoroutine(NextLevelCoroutine());
+    }
+
+    private IEnumerator NextLevelCoroutine()
+    {
+        GameManager.Instance.transitionAnim.SetTrigger("End");
+        yield return new WaitForSeconds(1);
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        GameManager.Instance.transitionAnim.SetTrigger("Start");
     }
 
     public void LoadScene(string sceneName)
     {
+        StartCoroutine(LoadSceneCoroutine(sceneName));
+    }
+
+    private IEnumerator LoadSceneCoroutine(string sceneName)
+    {
+        GameManager.Instance.transitionAnim.SetTrigger("End");
+        yield return new WaitForSeconds(1);
         SceneManager.LoadSceneAsync(sceneName);
+        GameManager.Instance.transitionAnim.SetTrigger("Start");
     }
 }

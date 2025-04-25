@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour
 {
-    private Life _life;
-
     [SerializeField]
     private float cooldown = 1f;
 
@@ -28,7 +26,6 @@ public class Spikes : MonoBehaviour
 
     void GiveDamage(float damage, GameObject gameObject)
     {
-        _life = gameObject.GetComponent<Life>();
-        _life.TakeDamage(damage);
+        gameObject.GetComponent<Player>().TakeDamage(damage);
     }
 }

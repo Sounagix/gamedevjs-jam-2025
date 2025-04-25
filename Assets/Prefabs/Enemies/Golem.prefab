@@ -183,9 +183,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.04268217, y: -0.09958792}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 4.129905
 --- !u!114 &7424115408503489919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxLife: 100
+  _currentLife: 0
 --- !u!114 &2936689351160043755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,5 +218,5 @@ MonoBehaviour:
   _lureDistance: 5
   _patrolSpeed: 1
   _attackRange: 2
-  _attackDamage: 10
+  _attackDamage: 35
   _attackCooldown: 3

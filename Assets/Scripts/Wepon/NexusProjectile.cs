@@ -49,10 +49,6 @@ public class NexusProjectile : MonoBehaviour
                 {
                     currentEnemy.TakeDamage(_damage, _owner);
                 }
-                //else if (d.gameObject.TryGetComponent(out Player player))
-                //{
-                //    player.TakeDamage(_damage);
-                //}
                 else if (d.gameObject.TryGetComponent(out Echoes echo))
                 {
                     echo.TakeDamage(_damage);

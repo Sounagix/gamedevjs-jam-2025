@@ -20,6 +20,8 @@ public class MovementBost : MonoBehaviour
 
     private Rigidbody2D _rigidbody2D;
 
+    private Animator _animator;
+
     private Coroutine _jumpCoroutine;
 
     private Coroutine _slideLeftCoroutine;
@@ -48,6 +50,7 @@ public class MovementBost : MonoBehaviour
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -80,6 +83,8 @@ public class MovementBost : MonoBehaviour
     {
         if (_isHoldingBostKey && _slideLeftCoroutine == null && NexusEnergy.instance.CanUseEnergy(_boostSlideEnergyCost))
         {
+            _animator.SetBool("CanJump", false);
+            _animator.SetBool("Sliding", true);
             NexusEnergy.instance.UseEnergy(_boostSlideEnergyCost);
             _slideLeftCoroutine = StartCoroutine(SLideLeft());
         }
@@ -89,6 +94,8 @@ public class MovementBost : MonoBehaviour
     {
         if (_isHoldingBostKey && _slideRightCoroutine == null && NexusEnergy.instance.CanUseEnergy(_boostSlideEnergyCost))
         {
+            _animator.SetBool("CanJump", false);
+            _animator.SetBool("Sliding", true);
             NexusEnergy.instance.UseEnergy(_boostSlideEnergyCost);
             _slideRightCoroutine = StartCoroutine(SLideRight());
         }
@@ -112,6 +119,8 @@ public class MovementBost : MonoBehaviour
         _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         _rigidbody2D.AddForce(Vector2.left * _boostSlideForce, ForceMode2D.Impulse);
         _slideLeftCoroutine = null;
+        StartCoroutine(ResetSlideAnim(0.3f));
+
     }
 
     private IEnumerator SLideRight()
@@ -121,5 +130,13 @@ public class MovementBost : MonoBehaviour
         _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;   
         _rigidbody2D.AddForce(Vector2.right * _boostSlideForce, ForceMode2D.Impulse);
         _slideRightCoroutine = null;
+        StartCoroutine(ResetSlideAnim(0.3f));
+    }
+
+    private IEnumerator ResetSlideAnim(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        _animator.SetBool("Sliding", false);
+        _animator.SetBool("CanJump", true);
     }
 }

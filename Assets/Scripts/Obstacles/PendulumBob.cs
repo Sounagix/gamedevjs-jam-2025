@@ -10,7 +10,7 @@ public class PendulumBob : MonoBehaviour
     [SerializeField]
     private float damage = 20f;
 
-    private Life _life;
+    private Player _player;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -23,10 +23,10 @@ public class PendulumBob : MonoBehaviour
             rb.AddForce(direction * forceMagnitude, ForceMode2D.Impulse);
 
             // Take Damage
-            _life = collision.gameObject.GetComponent<Life>();
-            if (_life != null)
+            _player = collision.gameObject.GetComponent<Player>();
+            if (_player != null)
             {
-                _life.TakeDamage(damage);
+                _player.TakeDamage(damage);
             }
         }
     }

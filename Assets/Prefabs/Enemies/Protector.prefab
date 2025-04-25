@@ -218,5 +218,5 @@ MonoBehaviour:
   _lureDistance: 8
   _patrolSpeed: 2
   _attackRange: 2
-  _attackDamage: 1
+  _attackDamage: 5
   _attackCooldown: 1

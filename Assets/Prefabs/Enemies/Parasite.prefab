@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxLife: 0
+  _currentLife: 0
 --- !u!114 &1427227996574091229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,5 +214,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _state: 0
   _attackRange: 0
-  _attackDamage: 0
+  _attackDamage: 100
   _attackCooldown: 0
