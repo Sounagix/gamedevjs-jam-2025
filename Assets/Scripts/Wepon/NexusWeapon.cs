@@ -27,6 +27,9 @@ public class NexusWeapon : MonoBehaviour
     [SerializeField]
     private float _explosionForce;
 
+    [SerializeField]
+    private PlayerSounds _playerSounds;
+
     private Player _player;
 
     private Animator _animator;
@@ -54,6 +57,7 @@ public class NexusWeapon : MonoBehaviour
     {
         if (_nexusShootCoroutine == null && NexusEnergy.instance.CanUseEnergy(_projectileCost))
         {
+            _playerSounds.PlayOnShot(PLAYER_SOUNDS.SHOT);
             _animator.SetBool("Attacking", true);
             NexusEnergy.instance.UseEnergy(_projectileCost);
             _nexusShootCoroutine = StartCoroutine(ShootCoroutine());

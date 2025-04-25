@@ -12,6 +12,8 @@ public class NexusEnergy : MonoBehaviour
     [SerializeField]
     private float _energyPercentageRegeneration;
 
+    private PlayerSounds _playerSounds;
+
     private float _currentEnergy;
 
     public bool energyRegenerationAllowed = true;
@@ -25,6 +27,7 @@ public class NexusEnergy : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            _playerSounds = GetComponent<PlayerSounds>();
         }
         else
         {
@@ -39,7 +42,12 @@ public class NexusEnergy : MonoBehaviour
 
     public bool CanUseEnergy(float value)
     {
-        return _currentEnergy >= value;
+        if (_currentEnergy >= value)
+        {
+            return true;
+        }
+        _playerSounds.PlayOnShot(PLAYER_SOUNDS.ERROR);
+        return false;
     }
 
     public void SetIsEnergyRegenerationAllowed(bool value)

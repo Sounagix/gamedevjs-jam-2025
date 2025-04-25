@@ -12,6 +12,8 @@ public class MovementBost : MonoBehaviour
     [SerializeField]
     private float _boostSlideEnergyCost, _boostJumpEnergyCost;
 
+    private PlayerSounds _playerSounds; 
+
     private bool _isHoldingBostKey = false;
 
     private bool _isGrounded;
@@ -47,6 +49,7 @@ public class MovementBost : MonoBehaviour
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _playerSounds = GetComponent<PlayerSounds>();
     }
 
 
@@ -69,6 +72,7 @@ public class MovementBost : MonoBehaviour
     {
         if (_isGrounded && _isHoldingBostKey && _jumpCoroutine == null && NexusEnergy.instance.CanUseEnergy(_boostJumpEnergyCost))
         {
+            _playerSounds.PlayOnShot(PLAYER_SOUNDS.CHARGE);
             NexusEnergy.instance.UseEnergy(_boostJumpEnergyCost);
             _jumpCoroutine = StartCoroutine(Jump());
         }
@@ -78,6 +82,7 @@ public class MovementBost : MonoBehaviour
     {
         if (_isHoldingBostKey && _slideLeftCoroutine == null && NexusEnergy.instance.CanUseEnergy(_boostSlideEnergyCost))
         {
+            _playerSounds.PlayOnShot(PLAYER_SOUNDS.CHARGE);
             NexusEnergy.instance.UseEnergy(_boostSlideEnergyCost);
             _slideLeftCoroutine = StartCoroutine(SLideLeft());
         }
@@ -87,6 +92,7 @@ public class MovementBost : MonoBehaviour
     {
         if (_isHoldingBostKey && _slideRightCoroutine == null && NexusEnergy.instance.CanUseEnergy(_boostSlideEnergyCost))
         {
+            _playerSounds.PlayOnShot(PLAYER_SOUNDS.CHARGE);
             NexusEnergy.instance.UseEnergy(_boostSlideEnergyCost);
             _slideRightCoroutine = StartCoroutine(SLideRight());
         }
@@ -96,6 +102,7 @@ public class MovementBost : MonoBehaviour
     {
         _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
         yield return new WaitForSeconds(_timeToWaitForBoost);
+        _playerSounds.PlayOnShot(PLAYER_SOUNDS.JUMP);
         _rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         _isGrounded = false;
         _rigidbody2D.AddForce(Vector2.up * _boostJumpForce, ForceMode2D.Impulse);

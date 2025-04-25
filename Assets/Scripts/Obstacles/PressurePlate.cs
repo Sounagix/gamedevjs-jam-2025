@@ -12,10 +12,13 @@ public class PressurePlate : MonoBehaviour
     [SerializeField]
     private Sprite activeSprite;
 
+    private AudioSource _audioSource;
+
     private void Awake()
     {
         gateController = GetComponentInParent<GateController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -26,6 +29,7 @@ public class PressurePlate : MonoBehaviour
             gateController.SetGateState(GateController.GateState.Open);
             objectsOnPlate++;
             spriteRenderer.sprite = activeSprite;
+            _audioSource.Play();
         }
     }
 

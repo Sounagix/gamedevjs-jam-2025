@@ -14,6 +14,7 @@ public class NexusProjectile : MonoBehaviour
 
     private GameObject _owner;
 
+
     public void SetUp(Vector2 dir, float speed, float lifeTime, int damage, float explosionRadius, float explosionForce, GameObject onwer)
     {
         _rigidbody = GetComponent<Rigidbody2D>();

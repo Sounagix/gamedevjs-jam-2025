@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -11,9 +12,6 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float _maxSpeed;
-
-    [SerializeField]
-    private EchoesManager _echoesManager;
 
     private Life _life;
 
@@ -48,7 +46,6 @@ public class Player : MonoBehaviour
         PlayerActions.OnPlayerMoveLeft -= HandleLeftMove;
         PlayerActions.OnPlayerMoveRight -= HandleRightMove;
         PlayerActions.PlayerJumping -= PlayerJumping;
-
     }
 
     private void Awake()
@@ -79,6 +76,7 @@ public class Player : MonoBehaviour
 
     private void PlayerJumping()
     {
+        _playerSounds.PlayOnShot(PLAYER_SOUNDS.JUMP);
         _isGrounded = false;
         _animator.SetBool("Grounded", _isGrounded);
     }
@@ -96,6 +94,7 @@ public class Player : MonoBehaviour
     {
         if (!_isHoldingBostKey && _isGrounded)
         {
+            _playerSounds.PlayOnShot(PLAYER_SOUNDS.JUMP);
             _isGrounded = false;
             _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
             PlayerActions.OnPlayerJump?.Invoke();
@@ -110,6 +109,7 @@ public class Player : MonoBehaviour
             _isGrounded = true;
             PlayerActions.OnPlayerGrouded?.Invoke();
             _animator.SetBool("Grounded", _isGrounded);
+            _playerSounds.StopSounds(PLAYER_SOUNDS.RUN);
         }
     }
 
@@ -120,19 +120,27 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        _playerSounds.PlaySound(PLAYER_SOUNDS.HURT);
+        _playerSounds.PlayOnShot(PLAYER_SOUNDS.HURT);
         if (_life.TakeDamage(dmg))
         {
             Die();
         }
     }
 
+    private void Update()
+    {
+        if(_isGrounded && math.abs( _rigidbody2D.velocity.x) > 1.0f && !_playerSounds.IsPlaying(PLAYER_SOUNDS.RUN))
+        {
+            _playerSounds.Play(PLAYER_SOUNDS.RUN);
+        }
+    }
+
     public void Die()
     {
-        Echoes lastEcho = _echoesManager.GetLastEcho();
+        Echoes lastEcho = EchoesManager.instance.GetLastEcho();
         if (lastEcho)
         {
-            _playerSounds.PlaySound(PLAYER_SOUNDS.SPAWN);
+            _playerSounds.PlayOnShot(PLAYER_SOUNDS.SPAWN);
             transform.position = lastEcho.transform.position;
             _life.ResetLife();
             NexusEnergy.instance.DrainEnergy();
@@ -141,9 +149,17 @@ public class Player : MonoBehaviour
         }
         else
         {
-            _playerSounds.PlaySound(PLAYER_SOUNDS.SPAWN);
+            _playerSounds.PlayOnShot(PLAYER_SOUNDS.SPAWN);
             // Add time for animation and sound
             GameManager.Instance.LoadScene(SCENE.GAME_OVER);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Crystal"))
+        {
+            _playerSounds.PlayOnShot(PLAYER_SOUNDS.POSITIVE);
         }
     }
 }

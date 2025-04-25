@@ -16,6 +16,8 @@ public class EchoesManager : MonoBehaviour
 
     private List<Echoes> _echoes = new List<Echoes>();
 
+    public static EchoesManager instance;
+
     private void OnEnable()
     {
         EchoesActions.OnCreateEcho += CreateEcho;
@@ -26,6 +28,19 @@ public class EchoesManager : MonoBehaviour
     {
         EchoesActions.OnCreateEcho -= CreateEcho;
         EchoesActions.OnEchoDie -= RemoveEcho;
+    }
+
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void CreateEcho(Vector2 pos)
