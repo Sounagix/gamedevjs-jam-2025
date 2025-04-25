@@ -17,12 +17,15 @@ public class AttackerTr: FourDirPatroller
 
     protected Coroutine _attackCoroutine;
 
+    protected Animator _animator;
+
 
 
     protected override void Awake()
     {
         base.Awake();
         _distanceToStop = _attackRange - 0.1f;
+        _animator = GetComponent<Animator>();
     }
 
     public void SetEnemy(GameObject enemy)

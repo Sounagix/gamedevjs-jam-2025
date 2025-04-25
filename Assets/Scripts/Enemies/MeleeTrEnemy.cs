@@ -8,6 +8,8 @@ public class MeleeTrEnemy : AttackerTr
     {
         if (_enemy != null)
         {
+            if (_animator != null)
+                _animator.SetTrigger("Attack");
             Player player = _enemy.GetComponent<Player>();
             if (player)
             {

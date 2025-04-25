@@ -9,6 +9,8 @@ public class MeleeEnemy : Attacker
     {
         if (_enemy != null)
         {
+            if(_animator)
+                _animator.SetTrigger("Attack");
             Player player = _enemy.GetComponent<Player>();
             if (player)
             {

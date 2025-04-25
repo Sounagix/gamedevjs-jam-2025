@@ -22,6 +22,8 @@ public class MovableEnemy : Enemy
 
     protected SpriteRenderer _spriteRenderer;
 
+    protected float _currentSpeed;
+
 
     protected override void Awake()
     {
@@ -32,6 +34,7 @@ public class MovableEnemy : Enemy
 
     public void SetTarget(GameObject target)
     {
+        _currentSpeed = _speed;
         _state = STATE.MOVE;
         _targetTr = target.transform;
     }
@@ -43,7 +46,7 @@ public class MovableEnemy : Enemy
         rb.velocity = Vector3.zero;
     }
 
-    public void StartPatrolling()
+    public virtual void StartPatrolling()
     {
         _state = STATE.PATROLING;
         _dir = Vector2.right;

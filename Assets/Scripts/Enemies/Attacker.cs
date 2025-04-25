@@ -19,10 +19,13 @@ public class Attacker : Patroller
 
     protected List<GameObject> _enemies = new();
 
+    protected Animator _animator;
+
     protected override void Awake()
     {
         base.Awake();
         _distanceToStop = _attackRange - 0.1f;
+        _animator = GetComponent<Animator>();
     }
 
     public void SetEnemy(GameObject enemy)
@@ -139,9 +142,7 @@ public class Attacker : Patroller
             }
             else
             {
-                _enemy = collision.gameObject;
-                _state = STATE.ATTACK;
-                _attackCoroutine = StartCoroutine(AttackCoroutine());
+                SetEnemy(collision.gameObject);
             }
         }
     }
@@ -159,15 +160,11 @@ public class Attacker : Patroller
             {
                 if (_enemy.Equals(collision.gameObject) && _enemies.Count > 0)
                 {
-                    _enemy = GetCloserEnemy();
-
+                    var newEnemy = GetCloserEnemy();
+                    SetEnemy(newEnemy);
                 }
                 else
                 {
-                    _enemy = null;
-                    _state = STATE.IDLE;
-                    if (_attackCoroutine != null)
-                        StopCoroutine(_attackCoroutine);
                     StopAttacking();
                     StopMoving();
                     StartPatrolling();

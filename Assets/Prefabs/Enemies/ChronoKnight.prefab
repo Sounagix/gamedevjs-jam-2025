@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxLife: 75
+  _currentLife: 0
 --- !u!114 &7519795246499945617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +233,7 @@ Animator:
   m_GameObject: {fileID: 6915498959923470660}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 21935f9783d816642ada42a4e4dbf118, type: 2}
+  m_Controller: {fileID: 22100000, guid: 77293bbebaa0d08479c22a89a84e6e11, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

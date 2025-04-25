@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ChronoController
+  m_Controller: {fileID: 9100000, guid: 34afcafb4ca76ed4a953b376aea46aa6, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 1159fdab2ce744c498dd89f8bf528215, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4085dad08edadb94d9b9596f854f4394, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8dab16291854a6f48b632b59273fec6e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3d7fb2f47cebeef49937f1d27580ddc9, type: 2}

@@ -29,4 +29,10 @@ public class Patroller : MovableEnemy
         base.Start();
         StartPatrolling();
     }
+
+    public override void StartPatrolling()
+    {
+        base.StartPatrolling();
+        _currentSpeed = _patrolSpeed;
+    }
 }

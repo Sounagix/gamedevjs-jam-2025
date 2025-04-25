@@ -22,11 +22,14 @@ public class Parasite : Enemy
 
     private CircleCollider2D _circleCollider2D;
 
+    private Animator _animator;
+
     protected override void Awake()
     {
         base.Awake();
         _circleCollider2D = GetComponent<CircleCollider2D>();
         _circleCollider2D.radius = _attackRange;
+        _animator = GetComponent<Animator>();
     }
 
     public override void SetTaunt(GameObject taunter)
@@ -105,6 +108,8 @@ public class Parasite : Enemy
     {
         do
         {
+            if(_animator)
+                _animator.SetTrigger("Attack");
             Player player = _enemy.GetComponent<Player>();
             if (player)
             {
