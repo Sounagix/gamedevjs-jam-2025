@@ -25,8 +25,7 @@ Play it on [**Itch.io**](https://randomplayerstudios.itch.io/echoes-of-nexus)!
 | Jump                  | Spacebar                 |
 | Create Echo           | E                        |
 | Super Movement Boosts | Hold Q + Move or Jump     |
-| Shoot Projectile      | Right Click              |
-| Nexus Explosion       | Hold Right Click         |
+| Shoot Projectile      | Right Click              
 
 ---
 
